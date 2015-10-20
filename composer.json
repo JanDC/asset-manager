@@ -1,6 +1,6 @@
 {
   "name": "jandc/asset-manager",
-  "description": "Library to combine and mangle your assets, version them (and more?)",
+  "description": "Library to combine and mangle your assets and version them",
   "license": "ISC",
   "require": {
     "php": ">=5.4.0",
