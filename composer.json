@@ -3,6 +3,7 @@
   "description": "Library to combine and mangle your assets, version them (and more?)",
   "license": "ISC",
   "require": {
+    "php": ">=5.4.0",
     "gkralik/php-uglifyjs": "^1.0",
     "twig/twig": "^1.22"
   },
