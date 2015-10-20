@@ -1,0 +1,22 @@
+{
+  "name": "jandc/composer-install",
+  "description": "Library to combine and mangle your assets, version them (and more?)",
+  "license": "ISC",
+  "require": {
+    "gkralik/php-uglifyjs": "^1.0",
+    "twig/twig": "^1.22"
+  },
+  "authors": [
+    {
+      "name": "Jan Decavele",
+      "email": "jandecavele@gmail.com"
+    }
+  ],
+  "minimum-stability": "beta",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "AssetManager\\": "JanDC/AssetManager/"
+    }
+  }
+}
