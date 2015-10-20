@@ -1,2 +1,3 @@
 # asset-manager
-Library to combine and mangle your assets, version them (and more?)
+Library to combine and mangle your assets and version them.
+Only JavaScript is supported atm
