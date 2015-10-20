@@ -1,5 +1,5 @@
 {
-  "name": "jandc/composer-install",
+  "name": "jandc/asset-manager",
   "description": "Library to combine and mangle your assets, version them (and more?)",
   "license": "ISC",
   "require": {
