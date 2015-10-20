@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8f295d5f84334e948d18f22b52cf801c",
+    "hash": "69c12a8d7aec4fe47533a27f2173b293",
     "packages": [
         {
             "name": "gkralik/php-uglifyjs",
@@ -107,6 +107,8 @@
     "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.4.0"
+    },
     "platform-dev": []
 }
