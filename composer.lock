@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ecd33d87343e09a2dd917b64519d2323",
+    "hash": "7cb17303786044f84586e092b61586c7",
     "packages": [
         {
             "name": "mishoo/UglifyJS2",
