@@ -22,6 +22,10 @@ class AssetManager
 
     public function __construct($assetFolder, $assetPath, $debug = false)
     {
+        $assetFolder = rtrim($assetFolder,'/').'/';
+        $assetPath = rtrim($assetPath, '/') . '/';
+
+
         $this->jsFolder = $assetFolder . '/js/';
         $this->jsPath = $assetPath . '/js/';
 
@@ -63,7 +67,6 @@ class AssetManager
             } elseif ($attemptFetch = file_get_contents($path)) {
                 return $attemptFetch;
             }
-
         }, $paths);
 
         if ($this->debug) {
