@@ -26,8 +26,8 @@ class AssetManager
         $assetPath = rtrim($assetPath, '/') . '/';
 
 
-        $this->jsFolder = $assetFolder . '/js/';
-        $this->jsPath = $assetPath . '/js/';
+        $this->jsFolder = $assetFolder . 'js/';
+        $this->jsPath = $assetPath . 'js/';
 
         $this->jsCacheFolder = $assetFolder . 'dist/js/';
         $this->jsCachePath = $assetPath . 'dist/js/';
