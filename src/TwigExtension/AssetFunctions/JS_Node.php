@@ -35,7 +35,7 @@ class JS_Node extends Twig_Node
                 ->addDebugInfo($this)
                 ->write("ob_start();\n")
                 ->subcompile($this->getNode('body'))
-                ->write("echo \$this->env->getExtension('AssetExtension')->assetManager->compileJsFromString(")
+                ->write("echo \$this->env->getExtension('".$this->assetExtensionName."')->getAssetManager()->compileJsFromString(")
                 ->raw('trim(ob_get_clean())')
                 ->raw(");\n");
         }

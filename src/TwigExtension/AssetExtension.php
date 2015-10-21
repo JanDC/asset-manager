@@ -30,6 +30,11 @@ class AssetExtension extends \Twig_Extension
         return 'AssetExtension';
     }
 
+    public function getAssetManager()
+    {
+        return $this->assetManager;
+    }
+
     public function getTokenParsers()
     {
         return [
