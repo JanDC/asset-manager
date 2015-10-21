@@ -32,6 +32,8 @@ class AssetManager
         $this->jsCacheFolder = $assetFolder . 'dist/js/';
         $this->jsCachePath = $assetPath . 'dist/js/';
 
+        $this->debug=$debug;
+
         if (!file_exists($this->jsCacheFolder)) {
             mkdir($this->jsCacheFolder, 0777, true);
         }

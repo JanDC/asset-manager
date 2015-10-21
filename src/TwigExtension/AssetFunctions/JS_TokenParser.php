@@ -11,6 +11,7 @@ class JS_TokenParser extends Twig_TokenParser
     /** @var AssetManager $assetManager */
     private $assetManager;
     private $debug;
+    private $assetExtensionName = null;
 
     public function parse(Twig_Token $token)
     {
@@ -31,6 +32,7 @@ class JS_TokenParser extends Twig_TokenParser
     public function setAssetExtensionName($assetExtensionName)
     {
         $this->assetExtensionName = $assetExtensionName;
+        return $this;
     }
 
     public function setAssetManager(AssetManager $assetManager)

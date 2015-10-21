@@ -33,7 +33,7 @@ class AssetExtension extends \Twig_Extension
     public function getTokenParsers()
     {
         return [
-            (new JS_TokenParser())->setAssetManager($this->assetManager)->setDebug($this->debug)
+            (new JS_TokenParser())->setAssetManager($this->assetManager)->setDebug($this->debug)->setAssetExtensionName($this->getName())
         ];
     }
 
