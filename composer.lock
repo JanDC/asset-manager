@@ -4,40 +4,17 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "69c12a8d7aec4fe47533a27f2173b293",
+    "hash": "ecd33d87343e09a2dd917b64519d2323",
     "packages": [
         {
-            "name": "gkralik/php-uglifyjs",
-            "version": "1.0.0",
+            "name": "mishoo/UglifyJS2",
+            "version": "2.4.24",
             "source": {
                 "type": "git",
-                "url": "https://github.com/gkralik/php-uglifyjs.git",
-                "reference": "c76667a3adaed9efd54ef5ba90576308ed88c291"
+                "url": "https://github.com/mishoo/UglifyJS2",
+                "reference": "tags/v2.4.24"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gkralik/php-uglifyjs/zipball/c76667a3adaed9efd54ef5ba90576308ed88c291",
-                "reference": "c76667a3adaed9efd54ef5ba90576308ed88c291",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GK\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL 2.1"
-            ],
-            "authors": [
-                {
-                    "name": "Gregor Kralik",
-                    "email": "g.kralik@gmail.com"
-                }
-            ],
-            "description": "PHP Javascript packer",
-            "time": "2015-10-10 12:58:30"
+            "type": "library"
         },
         {
             "name": "twig/twig",

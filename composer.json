@@ -2,10 +2,24 @@
   "name": "jandc/asset-manager",
   "description": "Library to combine and mangle your assets and version them",
   "license": "ISC",
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "mishoo/UglifyJS2",
+        "version": "2.4.24",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/mishoo/UglifyJS2",
+          "reference": "tags/v2.4.24"
+        }
+      }
+    }
+  ],
   "require": {
     "php": ">=5.4.0",
-    "gkralik/php-uglifyjs": "^1.0",
-    "twig/twig": "^1.0"
+    "twig/twig": "^1.0",
+    "mishoo/UglifyJS2": "^2.4"
   },
   "authors": [
     {
