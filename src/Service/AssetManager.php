@@ -3,6 +3,8 @@
 namespace AssetManager\Service;
 
 use GK\JavascriptPacker;
+use UglifyJsWrapper\Options as JsWrapperOptions;
+use UglifyJsWrapper\Wrapper as JsWrapper;
 
 class AssetManager
 {
@@ -22,9 +24,8 @@ class AssetManager
 
     public function __construct($assetFolder, $assetPath, $debug = false)
     {
-        $assetFolder = rtrim($assetFolder,'/').'/';
+        $assetFolder = rtrim($assetFolder, '/') . '/';
         $assetPath = rtrim($assetPath, '/') . '/';
-
 
         $this->jsFolder = $assetFolder . 'js/';
         $this->jsPath = $assetPath . 'js/';
@@ -32,7 +33,7 @@ class AssetManager
         $this->jsCacheFolder = $assetFolder . 'dist/js/';
         $this->jsCachePath = $assetPath . 'dist/js/';
 
-        $this->debug=$debug;
+        $this->debug = $debug;
 
         if (!file_exists($this->jsCacheFolder)) {
             mkdir($this->jsCacheFolder, 0777, true);
@@ -41,8 +42,9 @@ class AssetManager
 
     public function compileJsFromString($jsData)
     {
-        $minifier = new JavascriptPacker($jsData);
-        return $minifier->pack();
+        $tmpFile = '/tmp/jstmp-' . time() . '.js';
+        file_put_contents($tmpFile, $jsData);
+        return JsWrapper::execute($tmpFile, [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
     }
 
     public function combineScriptsAndMangle(array $scripts)

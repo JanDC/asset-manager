@@ -5,6 +5,7 @@
   "require": {
     "php": ">=5.4.0",
     "gkralik/php-uglifyjs": "^1.0",
+    "jandc/uglify-js-wrapper": "2.4.24",
     "twig/twig": "^1.0"
   },
   "authors": [
@@ -19,5 +20,31 @@
     "psr-4": {
       "AssetManager\\": "src/"
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "mishoo/UglifyJS2",
+        "version": "2.4.24",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/mishoo/UglifyJS2",
+          "reference": "tags/v2.4.24"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "gijsroge/priority-navigation",
+        "version": "1.0.9",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/gijsroge/priority-navigation",
+          "reference": "1.0.9"
+        }
+      }
+    }
+  ]
 }
