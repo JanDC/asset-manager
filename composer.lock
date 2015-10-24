@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b4d5691c8f27b339f4f14b1428ddff30",
+    "hash": "1504a820d7c2c582512ece6a05381d9e",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -113,7 +113,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JanDC/uglify-js-wrapper/zipball/8a6c3a1c801f6a48746549380043e737c85ef848",
+                "url": "https://api.github.com/repos/JanDC/uglify-js-wrapper/zipball/e94308e78dd4bc16ade5d80944c71b62a8d0272e",
                 "reference": "8a6c3a1c801f6a48746549380043e737c85ef848",
                 "shasum": ""
             },

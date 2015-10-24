@@ -33,18 +33,13 @@
           "reference": "tags/v2.4.24"
         }
       }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "gijsroge/priority-navigation",
-        "version": "1.0.9",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/gijsroge/priority-navigation",
-          "reference": "1.0.9"
-        }
-      }
     }
-  ]
+  ],
+  "scripts": {
+    "post-autoload-dump": [
+      "cd vendor/mishoo/UglifyJS2 && npm install",
+      "ln -sf `pwd`/vendor/mishoo/UglifyJS2/bin/uglifyjs `pwd`/bin/uglifyjs",
+      "chmod +x `pwd`/bin/uglifyjs"
+    ]
+  }
 }
