@@ -1,0 +1,1 @@
+<script {% for key,value in attributes %}{{ key }}{{ value is not null?'="'~value~'"' }} {% endfor %} src="{{ jsPath }}"></script>

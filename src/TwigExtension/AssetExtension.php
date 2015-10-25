@@ -17,7 +17,20 @@ class AssetExtension extends \Twig_Extension
     {
         $this->debug = $debug;
         $this->assetManager = new AssetManager($assetFolder, $assetPath, $debug);
-        $this->combineFunction = new CombineFunction($this->assetManager);
+    }
+
+    public function registerEnvironment(\Twig_Environment $twigEnvironment)
+    {
+        $currentLoader = $twigEnvironment->getLoader();
+        if ($currentLoader instanceof \Twig_Loader_Filesystem) {
+            $currentLoader->addPath(__DIR__ . '/widgets', 'assetwidgets');
+        } elseif ($currentLoader instanceof \Twig_Loader_Chain) {
+            $fsloader = new \Twig_Loader_Filesystem();
+            $fsloader->addPath(__DIR__ . '/widgets', 'assetwidgets');
+            $currentLoader->addLoader($fsloader);
+        }
+        $twigEnvironment->setLoader($currentLoader);
+        $this->combineFunction = new CombineFunction($this->assetManager, $twigEnvironment, $this->debug);
     }
 
     /**
@@ -49,6 +62,7 @@ class AssetExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        return [new \Twig_SimpleFunction('combineJsAssets', [$this->combineFunction, 'combineAssets'])];
+        return [new \Twig_SimpleFunction('combineJsAssets', [$this->combineFunction, 'combineAssets'], ['is_safe' => ['html', 'js']])];
     }
+
 }

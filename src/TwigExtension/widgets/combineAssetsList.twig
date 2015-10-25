@@ -1,0 +1,3 @@
+{% for jsPath in jsPaths %}
+    {% include '@assetwidgets/combineAssets.twig' with {'attributes': attributes, 'jsPath': jsPath} only %}
+{% endfor %}
