@@ -18,7 +18,7 @@ class CombineFunction
         if ($this->debug) {
             $assetManager = $this->assetManager;
             $assetPaths = array_map(function ($assetPath) use ($assetManager) {
-                if (strpos($assetPath, $assetManager->getJsPath() == FALSE)) {
+                if (strpos($assetPath, $assetManager->getJsPath()) == FALSE) {
                     return $assetManager->getJsPath() . $assetPath;
                 }
                 return $assetPath;
