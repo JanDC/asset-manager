@@ -41,4 +41,6 @@ If you encounter difficulties resolving the javascript dependencies, add followi
 
 You can use the assetManager class out of the box, or register the Twig Extension to your twig environment.
 
+Note that you have to register your twig environment back into the extension to use de script combine function.
+
 Notably you can use the 'manglejs'/'endmanglejs' tags to encapsulate inline javascript in your template to mangle and minify them 

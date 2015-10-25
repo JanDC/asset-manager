@@ -40,6 +40,16 @@ class AssetManager
         }
     }
 
+    public function getJsFolder()
+    {
+        return $this->jsFolder;
+    }
+
+    public function getJsPath()
+    {
+        return $this->jsPath;
+    }
+
     public function compileJsFromString($jsData)
     {
         $tmpFile = '/tmp/jstmp-' . time() . '.js';

@@ -16,6 +16,14 @@ class CombineFunction
     public function combineAssets($combinedresultName, array $assetPaths, array $attributes, $foreReload = false)
     {
         if ($this->debug) {
+            $assetManager = $this->assetManager;
+            $assetPaths = array_map(function ($assetPath) use ($assetManager) {
+                if (strpos($assetPath, $assetManager->getJsPath() == FALSE)) {
+                    return $assetManager->getJsPath() . $assetPath;
+                }
+                return $assetPath;
+            }, $assetPaths);
+
             return $this->twig->render('@assetwidgets/combineAssetsList.twig', ['attributes' => $attributes, 'jsPaths' => $assetPaths]);
         } else {
             $combinedresult = $this->assetManager->combineLibsFromPaths($assetPaths, $combinedresultName, $foreReload);
