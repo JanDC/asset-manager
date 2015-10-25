@@ -1,6 +1,8 @@
 # asset-manager
 Library to combine and mangle your assets and version them.
-Only JavaScript is supported atm
+For now only JavaScript is supported.
+
+### Installation
 
 
 Following scripts have to be executed
@@ -33,3 +35,10 @@ If you encounter difficulties resolving the javascript dependencies, add followi
     }    
   ]
 ```
+
+
+### Usage
+
+You can use the assetManager class out of the box, or register the Twig Extension to your twig environment.
+
+Notably you can use the 'manglejs'/'endmanglejs' tags to encapsulate inline javascript in your template to mangle and minify them 
