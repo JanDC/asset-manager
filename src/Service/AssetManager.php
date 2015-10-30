@@ -75,18 +75,14 @@ class AssetManager
         }
         $combinedFilename = $this->createVersionedFile($combinedFilename);
 
-        $scripts = array_map(function ($path) use ($jsFolder) {
+        $result = '';
+        foreach ($paths as $path) {
             if (file_exists($jsFolder . $path)) {
-                return file_get_contents($jsFolder . $path);
+                $result .= JsWrapper::execute($jsFolder . $path,
+                    [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
             } elseif ($attemptFetch = file_get_contents($path)) {
-                return $attemptFetch;
+                $result .= JsWrapper::execute($path, [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
             }
-        }, $paths);
-
-        if ($this->debug) {
-            $result = implode(' ', $scripts);
-        } else {
-            $result = $this->combineScriptsAndMangle($scripts);
         }
 
         file_put_contents($this->jsCacheFolder . $combinedFilename, $result);
