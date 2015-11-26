@@ -5,6 +5,7 @@ namespace AssetManager\Service;
 use GK\JavascriptPacker;
 use UglifyJsWrapper\Options as JsWrapperOptions;
 use UglifyJsWrapper\Wrapper as JsWrapper;
+use UglifyJsWrapper\Wrapper;
 
 class AssetManager
 {
@@ -59,7 +60,7 @@ class AssetManager
 
     public function combineScriptsAndMangle(array $scripts)
     {
-        return $this->compileJsFromString(implode(' ', $scripts));
+        return Wrapper::executeArray($scripts, [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
     }
 
     public function combineLibsFromPaths(array $paths, $combinedFilename, $forceReload = false)
@@ -75,16 +76,15 @@ class AssetManager
         }
         $combinedFilename = $this->createVersionedFile($combinedFilename);
 
-        $result = '';
-        foreach ($paths as $path) {
+        foreach ($paths as &$path) {
             if (file_exists($jsFolder . $path)) {
-                $result .= JsWrapper::execute($jsFolder . $path,
-                    [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
-            } elseif ($attemptFetch = file_get_contents($path)) {
-                $result .= JsWrapper::execute($path, [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
+                $path = $jsFolder . $path;
+            } elseif (!file_exists($path)) {
+                unset($path);
             }
         }
 
+        $result = Wrapper::executeFileArray($paths, [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
         file_put_contents($this->jsCacheFolder . $combinedFilename, $result);
 
         return $this->jsCachePath . $combinedFilename;
