@@ -60,7 +60,7 @@ class AssetManager
 
     public function combineScriptsAndMangle(array $scripts)
     {
-        return Wrapper::executeArray($scripts, [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
+        return Wrapper::executeFileArray($scripts, [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
     }
 
     public function combineLibsFromPaths(array $paths, $combinedFilename, $forceReload = false)
