@@ -6,7 +6,7 @@ use AssetManager\Service\AssetManager;
 use AssetManager\TwigExtension\AssetFunctions\CombineFunction;
 use AssetManager\TwigExtension\AssetFunctions\JS_TokenParser;
 
-class AssetExtension extends \Twig_Extension
+class AssetExtension extends \Twig_Extension implements \Twig_Extension_InitRuntimeInterface
 {
     /**
      * @var AssetManager
