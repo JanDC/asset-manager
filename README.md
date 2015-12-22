@@ -25,11 +25,11 @@ If you encounter difficulties resolving the javascript dependencies, add followi
       "type": "package",
       "package": {
         "name": "mishoo/UglifyJS2",
-        "version": "2.4.24",
+        "version": "2.6.1",
         "source": {
           "type": "git",
           "url": "https://github.com/mishoo/UglifyJS2",
-          "reference": "tags/v2.4.24"
+          "reference": "tags/v2.6.1"
         }
       }
     }    
