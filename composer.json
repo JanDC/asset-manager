@@ -4,7 +4,7 @@
   "license": "ISC",
   "require": {
     "php": ">=5.4.0",
-    "jandc/uglify-js-wrapper": "2.4.24",
+    "jandc/uglify-js-wrapper": "2.6.1",
     "twig/twig": "^1.0"
   },
   "authors": [
