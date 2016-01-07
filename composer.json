@@ -4,7 +4,7 @@
   "license": "ISC",
   "require": {
     "php": ">=5.4.0",
-    "jandc/uglify-js-wrapper": "^2.6",
+    "patchwork/jsqueeze": "~2.0",
     "twig/twig": "^1.0"
   },
   "authors": [
@@ -19,26 +19,5 @@
     "psr-4": {
       "AssetManager\\": "src/"
     }
-  },
-  "repositories": [
-    {
-      "type": "package",
-      "package": {
-        "name": "mishoo/UglifyJS2",
-        "version": "2.6.1",
-        "source": {
-          "type": "git",
-          "url": "https://github.com/mishoo/UglifyJS2",
-          "reference": "tags/v2.6.1"
-        }
-      }
-    }
-  ],
-  "scripts": {
-    "post-autoload-dump": [
-      "cd vendor/mishoo/UglifyJS2 && npm install",
-      "ln -sf `pwd`/vendor/mishoo/UglifyJS2/bin/uglifyjs `pwd`/vendor/jandc/uglify-js-wrapper/bin/uglifyjs",
-      "chmod +x `pwd`/vendor/jandc/uglify-js-wrapper/bin/uglifyjs"
-    ]
   }
 }

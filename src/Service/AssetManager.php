@@ -2,10 +2,7 @@
 
 namespace AssetManager\Service;
 
-use GK\JavascriptPacker;
-use UglifyJsWrapper\Options as JsWrapperOptions;
-use UglifyJsWrapper\Wrapper as JsWrapper;
-use UglifyJsWrapper\Wrapper;
+use Patchwork\JSqueeze;
 
 class AssetManager
 {
@@ -23,6 +20,9 @@ class AssetManager
      */
     private $debug;
 
+    /** @var JSqueeze $jsSqueeze */
+    private $jsSqueeze;
+
     public function __construct($assetFolder, $assetPath, $debug = false)
     {
         $assetFolder = rtrim($assetFolder, '/') . '/';
@@ -35,6 +35,7 @@ class AssetManager
         $this->jsCachePath = $assetPath . 'dist/js/';
 
         $this->debug = $debug;
+        $this->jsSqueeze = new JSqueeze();
 
         if (!file_exists($this->jsCacheFolder)) {
             mkdir($this->jsCacheFolder, 0777, true);
@@ -53,14 +54,15 @@ class AssetManager
 
     public function compileJsFromString($jsData)
     {
-        $tmpFile = '/tmp/jstmp-' . time() . '.js';
-        file_put_contents($tmpFile, $jsData);
-        return JsWrapper::execute($tmpFile, [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
+        return $this->jsSqueeze->squeeze($jsData);
     }
 
     public function combineScriptsAndMangle(array $scripts)
     {
-        return Wrapper::executeFileArray($scripts, [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
+        $jsData = join(' ', array_map(function ($script) {
+            return file_get_contents($script);
+        }, $scripts));
+        return $this->jsSqueeze->squeeze($jsData);
     }
 
     public function combineLibsFromPaths(array $paths, $combinedFilename, $forceReload = false)
@@ -84,7 +86,7 @@ class AssetManager
             }
         }
 
-        $result = Wrapper::executeFileArray($paths, [JsWrapperOptions::MANGLE, JsWrapperOptions::COMPRESS]);
+        $result = $this->combineScriptsAndMangle($paths);
         file_put_contents($this->jsCacheFolder . $combinedFilename, $result);
 
         return $this->jsCachePath . $combinedFilename;
