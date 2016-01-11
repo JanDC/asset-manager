@@ -6,28 +6,51 @@ use AssetManager\Service\AssetManager;
 
 class CombineFunction
 {
-    function __construct(AssetManager $assetManager, \Twig_Environment $twig, $debug = false)
+    function __construct(AssetManager $assetManager, $debug = false)
     {
         $this->debug = $debug;
-        $this->twig = $twig;
         $this->assetManager = $assetManager;
     }
 
-    public function combineAssets($combinedresultName, array $assetPaths, array $attributes, $foreReload = false)
-    {
+    public function combineAssets(
+        \Twig_Environment $twig,
+        $combinedresultName,
+        array $assetPaths,
+        array $attributes,
+        $foreReload = false
+    ) {
+
+        $this->registerWidgetTemplates($twig);
+
         if ($this->debug) {
             $assetManager = $this->assetManager;
             $assetPaths = array_map(function ($assetPath) use ($assetManager) {
-                if (strpos($assetPath, $assetManager->getJsPath()) == FALSE) {
+                if (strpos($assetPath, $assetManager->getJsPath()) == false) {
                     return $assetManager->getJsPath() . $assetPath;
                 }
                 return $assetPath;
             }, $assetPaths);
 
-            return $this->twig->render('@assetwidgets/combineAssetsList.twig', ['attributes' => $attributes, 'jsPaths' => $assetPaths]);
+            return $twig->render('@assetwidgets/combineAssetsList.twig',
+                ['attributes' => $attributes, 'jsPaths' => $assetPaths]);
         } else {
             $combinedresult = $this->assetManager->combineLibsFromPaths($assetPaths, $combinedresultName, $foreReload);
-            return $this->twig->render('@assetwidgets/combineAssets.twig', ['attributes' => $attributes, 'jsPath' => $combinedresult]);
+            return $twig->render('@assetwidgets/combineAssets.twig',
+                ['attributes' => $attributes, 'jsPath' => $combinedresult]);
         }
     }
+
+    private function registerWidgetTemplates(\Twig_Environment &$twigEnvironment)
+    {
+        $currentLoader = $twigEnvironment->getLoader();
+        if ($currentLoader instanceof \Twig_Loader_Filesystem) {
+            $currentLoader->addPath(__DIR__ . '/../widgets', 'assetwidgets');
+        } elseif ($currentLoader instanceof \Twig_Loader_Chain) {
+            $fsloader = new \Twig_Loader_Filesystem();
+            $fsloader->addPath(__DIR__ . '/../widgets', 'assetwidgets');
+            $currentLoader->addLoader($fsloader);
+        }
+        $twigEnvironment->setLoader($currentLoader);
+    }
+
 }

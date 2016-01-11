@@ -8,29 +8,17 @@ use AssetManager\TwigExtension\AssetFunctions\JS_TokenParser;
 
 class AssetExtension extends \Twig_Extension implements \Twig_Extension_InitRuntimeInterface
 {
-    /**
-     * @var AssetManager
-     */
+    /** @var AssetManager $assetManager */
     private $assetManager;
+
+    /** @var  bool $debug */
+    private $debug;
 
     public function __construct($assetFolder, $assetPath, $debug)
     {
         $this->debug = $debug;
         $this->assetManager = new AssetManager($assetFolder, $assetPath, $debug);
-    }
-
-    public function initRuntime(\Twig_Environment $twigEnvironment)
-    {
-        $currentLoader = $twigEnvironment->getLoader();
-        if ($currentLoader instanceof \Twig_Loader_Filesystem) {
-            $currentLoader->addPath(__DIR__ . '/widgets', 'assetwidgets');
-        } elseif ($currentLoader instanceof \Twig_Loader_Chain) {
-            $fsloader = new \Twig_Loader_Filesystem();
-            $fsloader->addPath(__DIR__ . '/widgets', 'assetwidgets');
-            $currentLoader->addLoader($fsloader);
-        }
-        $twigEnvironment->setLoader($currentLoader);
-        $this->combineFunction = new CombineFunction($this->assetManager, $twigEnvironment, $this->debug);
+        $this->combineFunction = new CombineFunction($this->assetManager, $this->debug);
     }
 
     /**
@@ -62,7 +50,10 @@ class AssetExtension extends \Twig_Extension implements \Twig_Extension_InitRunt
 
     public function getFunctions()
     {
-        return [new \Twig_SimpleFunction('combineJsAssets', [$this->combineFunction, 'combineAssets'], ['is_safe' => ['html', 'js']])];
+        return [
+            new \Twig_SimpleFunction('combineJsAssets', [$this->combineFunction, 'combineAssets'],
+                ['is_safe' => ['html', 'js'], 'needs_environment' => true])
+        ];
     }
 
 }
