@@ -1,1 +1,7 @@
-<script {% for key,value in attributes %}{{ key }}{{ value is not null?'="'~value~'"' }} {% endfor %} src="{{ jsPath }}"></script>
+{% if loadJS is defined and loadJS %}
+    <script>
+        loadJS('{{ jsPath }}');
+    </script>
+{% else %}
+    <script {% for key,value in attributes %}{{ key }}{{ value is not null?'="'~value~'"' }} {% endfor %} src="{{ jsPath }}"></script>
+{% endif %}

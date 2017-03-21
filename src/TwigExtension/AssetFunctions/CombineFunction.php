@@ -6,10 +6,11 @@ use AssetManager\Service\AssetManager;
 
 class CombineFunction
 {
-    function __construct(AssetManager $assetManager, $debug = false)
+    function __construct(AssetManager $assetManager, $debug = false, $loadJS = false)
     {
         $this->debug = $debug;
         $this->assetManager = $assetManager;
+        $this->loadJS = $loadJS;
     }
 
     public function combineAssets(
@@ -36,7 +37,7 @@ class CombineFunction
         } else {
             $combinedresult = $this->assetManager->combineLibsFromPaths($assetPaths, $combinedresultName, $foreReload);
             return $twig->render('@assetwidgets/combineAssets.twig',
-                ['attributes' => $attributes, 'jsPath' => $combinedresult]);
+                ['attributes' => $attributes, 'jsPath' => $combinedresult, 'loadJS' => $this->loadJS]);
         }
     }
 

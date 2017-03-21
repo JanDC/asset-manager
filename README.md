@@ -6,3 +6,6 @@ For now only JavaScript is supported.
 
 You can use the assetManager class out of the box, or register the Twig Extension to your twig environment.
 Notably you can use the 'manglejs'/'endmanglejs' tags to encapsulate inline javascript in your template to mangle and minify them 
+
+### Dependencies
+If you enable loadJS please include the [loadJS](https://github.com/filamentgroup/loadJS) library in your `<head></head>`.
