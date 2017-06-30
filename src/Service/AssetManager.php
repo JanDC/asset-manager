@@ -57,12 +57,10 @@ class AssetManager
         return $this->jsMinify->add($jsData)->minify();
     }
 
-    public function combineScriptsAndMangle(array $scripts)
+    public function combineScriptsAndMangle(array $scripts, $path = null)
     {
-        $jsData = join(' ', array_map(function ($script) {
-            return file_get_contents($script);
-        }, $scripts));
-        return $this->compileJsFromString($jsData);
+        $this->jsMinify->add($scripts);
+        return $this->jsMinify->minify($path);
     }
 
     public function combineLibsFromPaths(array $paths, $combinedFilename, $forceReload = false)
@@ -73,11 +71,14 @@ class AssetManager
             $this->jsCacheFolder,
             $forceReload || $this->debug
         );
+
         if ($versionedFile && !$forceReload && !$this->debug) {
+            // File already present
             return $this->jsCachePath . $versionedFile;
         }
         $combinedFilename = $this->createVersionedFile($combinedFilename);
 
+        // Validate paths
         foreach ($paths as &$path) {
             if (file_exists($jsFolder . $path)) {
                 $path = $jsFolder . $path;
@@ -86,9 +87,7 @@ class AssetManager
             }
         }
 
-        $result = $this->combineScriptsAndMangle($paths);
-        file_put_contents($this->jsCacheFolder . $combinedFilename, $result);
-
+        $this->combineScriptsAndMangle($paths, $this->jsCacheFolder . $combinedFilename);
         return $this->jsCachePath . $combinedFilename;
     }
 
