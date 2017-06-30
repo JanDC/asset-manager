@@ -2,7 +2,7 @@
 
 namespace AssetManager\Service;
 
-use Patchwork\JSqueeze;
+use MatthiasMullie\Minify\JS;
 
 class AssetManager
 {
@@ -20,8 +20,8 @@ class AssetManager
      */
     private $debug;
 
-    /** @var JSqueeze $jsSqueeze */
-    private $jsSqueeze;
+    /** @var  JS */
+    private $jsMinify;
 
     public function __construct($assetFolder, $assetPath, $debug = false)
     {
@@ -35,7 +35,7 @@ class AssetManager
         $this->jsCachePath = $assetPath . 'dist/js/';
 
         $this->debug = $debug;
-        $this->jsSqueeze = new JSqueeze();
+        $this->jsMinify = new Js();
 
         if (!file_exists($this->jsCacheFolder)) {
             mkdir($this->jsCacheFolder, 0777, true);
@@ -54,7 +54,7 @@ class AssetManager
 
     public function compileJsFromString($jsData)
     {
-        return $this->jsSqueeze->squeeze($jsData);
+        return $this->jsMinify->add($jsData)->minify();
     }
 
     public function combineScriptsAndMangle(array $scripts)
@@ -62,7 +62,7 @@ class AssetManager
         $jsData = join(' ', array_map(function ($script) {
             return file_get_contents($script);
         }, $scripts));
-        return $this->jsSqueeze->squeeze($jsData);
+        return $this->compileJsFromString($jsData);
     }
 
     public function combineLibsFromPaths(array $paths, $combinedFilename, $forceReload = false)
