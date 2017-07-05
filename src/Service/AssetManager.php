@@ -60,6 +60,7 @@ class AssetManager
     public function combineScriptsAndMangle(array $scripts, $path = null)
     {
         $this->jsMinify->add($scripts);
+
         return $this->jsMinify->minify($path);
     }
 
