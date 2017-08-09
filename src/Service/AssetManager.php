@@ -35,7 +35,7 @@ class AssetManager
         $this->jsCachePath = $assetPath . 'dist/js/';
 
         $this->debug = $debug;
-        $this->jsMinify = new Js();
+        $this->initializeJsMinify();
 
         if (!file_exists($this->jsCacheFolder)) {
             mkdir($this->jsCacheFolder, 0777, true);
@@ -57,8 +57,13 @@ class AssetManager
         return $this->jsMinify->add($jsData)->minify();
     }
 
+    private function initializeJsMinify(){
+        $this->jsMinify = new Js();
+    }
+
     public function combineScriptsAndMangle(array $scripts, $path = null)
     {
+        $this->initializeJsMinify();
         $this->jsMinify->add($scripts);
 
         return $this->jsMinify->minify($path);
