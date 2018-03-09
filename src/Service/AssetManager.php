@@ -26,7 +26,10 @@ class AssetManager
     public function __construct($assetFolder, $assetPath, $debug = false)
     {
         $assetFolder = rtrim($assetFolder, '/') . '/';
-        $assetPath = rtrim($assetPath, '/') . '/';
+
+        if (!empty($assetPath)) {
+            $assetPath = rtrim($assetPath, '/') . '/';
+        }
 
         $this->jsFolder = $assetFolder;
         $this->jsPath = $assetPath;
@@ -57,7 +60,8 @@ class AssetManager
         return $this->jsMinify->add($jsData)->minify();
     }
 
-    private function initializeJsMinify(){
+    private function initializeJsMinify()
+    {
         $this->jsMinify = new Js();
     }
 
