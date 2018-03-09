@@ -14,10 +14,10 @@ class AssetExtension extends \Twig_Extension implements \Twig_Extension_InitRunt
     /** @var  bool $debug */
     private $debug;
 
-    public function __construct($assetFolder, $assetPath, $debug, $loadJS)
+    public function __construct($assetFolder, $assetPath, $debug = false, $cacheFolder = 'dist/js/')
     {
         $this->debug = $debug;
-        $this->assetManager = new AssetManager($assetFolder, $assetPath, $debug);
+        $this->assetManager = new AssetManager($assetFolder, $assetPath, $debug, $cacheFolder);
         $this->combineFunction = new CombineFunction($this->assetManager, $this->debug, $loadJS);
     }
 
