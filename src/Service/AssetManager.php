@@ -23,7 +23,7 @@ class AssetManager
     /** @var  JS */
     private $jsMinify;
 
-    public function __construct($assetFolder, $assetPath, $debug = false)
+    public function __construct($assetFolder, $assetPath, $debug = false, $cacheFolder = 'dist/js/')
     {
         $assetFolder = rtrim($assetFolder, '/') . '/';
 
@@ -34,8 +34,8 @@ class AssetManager
         $this->jsFolder = $assetFolder;
         $this->jsPath = $assetPath;
 
-        $this->jsCacheFolder = $assetFolder . 'dist/js/';
-        $this->jsCachePath = $assetPath . 'dist/js/';
+        $this->jsCacheFolder = $assetFolder . $cacheFolder;
+        $this->jsCachePath = $assetPath . $cacheFolder;
 
         $this->debug = $debug;
         $this->initializeJsMinify();
